@@ -82,11 +82,24 @@ local function display_GIF()
 end
 
 function secondsToDays(inputSeconds)
- fdays = math.floor(inputSeconds/86400)
- fhours = math.floor((bit.mod(inputSeconds,86400))/3600)
- fminutes = math.floor(bit.mod((bit.mod(inputSeconds,86400)),3600)/60)
- fseconds = math.floor(bit.mod(bit.mod((bit.mod(inputSeconds,86400)),3600),60))
- return fdays.."d "..fhours.."h "..fminutes.."m "..fseconds.."s"
+	local fdays = math.floor(inputSeconds/86400)
+	local fhours = math.floor((bit.mod(inputSeconds,86400))/3600)
+	local fminutes = math.floor(bit.mod((bit.mod(inputSeconds,86400)),3600)/60)
+	local fseconds = math.floor(bit.mod(bit.mod((bit.mod(inputSeconds,86400)),3600),60))
+	local tempString = fseconds.."s"
+	local toreturn = tempString
+ 	if fminutes > 0 then
+		toreturn = fminutes.."m "..tempString
+		tempString = toreturn
+		if fhours > 0 then
+			toreturn = fhours.."h "..tempString
+			tempString = toreturn
+			if fdays > 0 then
+				toreturn = fdays.."d "..tempString
+			end
+		end
+ 	end
+ 	return toreturn
 end
 
 SLASH_GRITO1 = "/grito";	
@@ -157,9 +170,9 @@ SlashCmdList["GRITO"] = function(msg)
 		print(" /grito Usage:")
 		print("Test Event:")
 		print(" /grito test - trigger test event")
-		print("Frame Scale (Default 0.69):")
+		print("Frame Scale (Default 0.5):")
 		print(" /grito scale [num] - set frame scale to [num]")
-		print("Frame Position (Default x=0,y=275):")
+		print("Frame Position (Default x=0,y=350):")
 		print(" /grito x [num] - change x axis to [num] pixels from center")
 		print(" /grito y [num] - change y axis")
 		print("Syncing (Default ON):")
@@ -210,13 +223,13 @@ local function EventHandler( self, event, ... )
 
 	if event == "ADDON_LOADED" and arg1=="Grito_Dingo" then
 		if not frame_scale then
-			frame_scale=0.69
+			frame_scale=0.5
 		end
 		if not frame_x then
 			frame_x=0
 		end
 		if not frame_y then
-			frame_y=275
+			frame_y=350
 		end
 		updateFrame()
 		if not syncing then
