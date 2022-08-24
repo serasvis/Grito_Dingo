@@ -1,0 +1,15 @@
+## Interface: 80100
+
+## Title: Grito_Dingo
+## Notes: ENCHALADAS RACHEROS POR FAVOR!
+## Author: Seravis
+## Version: 1
+## DefaultState: Enabled
+## LoadOnDemand: 0
+
+## LoadManagers: AddonLoader
+## X-LoadOn-Always:delayed
+
+## SavedVariables: frame_scale,frame_x,frame_y,syncing,threshold,last_triggered
+
+Grito_Dingo.lua
