@@ -144,9 +144,6 @@ SlashCmdList["GRITO"] = function(msg)
 		display_GIF()
 		text1:SetText("¡This is a test!")
 		text2:SetText("You've been level "..UnitLevel("player").." for "..secondsToDays(t_this_lvl+(GetTime()-t_onload)) )
-		
-	elseif msg=="test2" then
-		C_ChatInfo.SendAddonMessage("GRITO_BROADCAST", "name=Seravis, level=202, time=2h69m420s", "GUILD")
 
 	elseif string.sub(msg,1,6)=="scale " then
 		local num = tonumber(string.sub(msg,7,-1))
