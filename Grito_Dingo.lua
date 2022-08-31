@@ -81,40 +81,40 @@ local function display_GIF()
 			mband1:Show()
 			cnftti1:Show()
 			show_frame=2
-			C_Timer.After(0, function()
+			C_Timer.After(0.008, function()
 				mband3:Hide()
 				cnftti3:Hide()
 				if mb_index==47 then mb_index=0 else mb_index=mb_index+1 end
 				if ci_index==299 then ci_index=1 else ci_index=ci_index+1 end
 				mband3:SetTexture("Interface\\AddOns\\Grito_Dingo\\MBAND\\file-"..mb_index..".tga")
 				cnftti3:SetTexture("Interface\\AddOns\\Grito_Dingo\\CNFTTI\\file-"..ci_index..".tga")
-				C_Timer.After(0, display_GIF)
+				C_Timer.After(0.008, display_GIF)
 			end)
 		elseif show_frame==2 then
 			mband2:Show()
 			cnftti2:Show()
 			show_frame=3
-			C_Timer.After(0, function()
+			C_Timer.After(0.008, function()
 				mband1:Hide()
 				cnftti1:Hide()
 				if mb_index==47 then mb_index=0 else mb_index=mb_index+1 end
 				if ci_index==299 then ci_index=1 else ci_index=ci_index+1 end
 				mband1:SetTexture("Interface\\AddOns\\Grito_Dingo\\MBAND\\file-"..mb_index..".tga")
 				cnftti1:SetTexture("Interface\\AddOns\\Grito_Dingo\\CNFTTI\\file-"..ci_index..".tga")
-				C_Timer.After(0, display_GIF)
+				C_Timer.After(0.008, display_GIF)
 			end)
 		else
 			mband3:Show()
 			cnftti3:Show()
 			show_frame=1
-			C_Timer.After(0, function()
+			C_Timer.After(0.008, function()
 				mband2:Hide()
 				cnftti2:Hide()
 				if mb_index==47 then mb_index=0 else mb_index=mb_index+1 end
 				if ci_index==299 then ci_index=1 else ci_index=ci_index+1 end
 				mband2:SetTexture("Interface\\AddOns\\Grito_Dingo\\MBAND\\file-"..mb_index..".tga")
 				cnftti2:SetTexture("Interface\\AddOns\\Grito_Dingo\\CNFTTI\\file-"..ci_index..".tga")
-				C_Timer.After(0, display_GIF)
+				C_Timer.After(0.008, display_GIF)
 			end)
 		end
 	end
