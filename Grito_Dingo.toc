@@ -10,6 +10,6 @@
 ## LoadManagers: AddonLoader
 ## X-LoadOn-Always:delayed
 
-## SavedVariables: frame_scale,frame_x,frame_y,syncing,audio,threshold,last_triggered
+## SavedVariables: frame_scale,frame_x,frame_y,syncing,audio,threshold
 
 Grito_Dingo.lua
