@@ -10,7 +10,7 @@ frame_y=350
 syncing=true
 audio=true
 threshold=12
-last_triggered=0
+local last_triggered=0
 local frame = CreateFrame( "FRAME" )
 frame:SetPoint("CENTER",frame_x,frame_y)
 frame:SetSize(1024,1024)
@@ -134,6 +134,14 @@ function secondsToDays(inputSeconds)
 	end
 end
 
+function onOrOff(b)
+	if b then
+		return "on"
+	else
+		return "off"
+	end
+end
+
 SLASH_GRITO1 = "/grito";	
 SlashCmdList["GRITO"] = function(msg)
 
@@ -144,7 +152,7 @@ SlashCmdList["GRITO"] = function(msg)
 		display_GIF()
 		text1:SetText("¡This is a test!")
 		text2:SetText("You've been level "..UnitLevel("player").." for "..secondsToDays(t_this_lvl+(GetTime()-t_onload)) )
-
+		
 	elseif string.sub(msg,1,6)=="scale " then
 		local num = tonumber(string.sub(msg,7,-1))
 		if num and type(num)=="number" then
@@ -213,14 +221,14 @@ SlashCmdList["GRITO"] = function(msg)
 	else
 		print(" /grito Usage:")
 		print(" /grito test - trigger test event")
-		print(" /grito scale [num] - (default 0.5) set frame scale to [num]")
-		print(" /grito x [num] - (default x=0) change x axis to [num] pixels from center")
-		print(" /grito y [num] - (default y=350) change y axis")
-		print(" /grito sync on - (default on) toggle on amigo broadcasts triggering the event")
+		print(" /grito scale [num] - (default 0.5; current "..frame_scale..") set frame scale to [num]")
+		print(" /grito x [num] - (default x=0; current "..frame_x..") change x axis to [num] pixels from center")
+		print(" /grito y [num] - (default y=350; current "..frame_y..") change y axis")
+		print(" /grito sync on - (default on; current "..onOrOff(syncing)..") toggle on amigo broadcasts triggering the event")
 		print(" /grito sync off - toggle it off >:(")
-		print(" /grito audio on - (default on) toggle on the mariachi music audio clip")
+		print(" /grito audio on - (default on; current "..onOrOff(audio)..") toggle on the mariachi music audio clip")
 		print(" /grito audio off - toggle it off >:(")
-		print(" /grito threshold [num] - (default 12) wait a minimum of [num] seconds before allowing broadcasts to retrigger the event. note: your own level ups are not blocked but do restart this timer")
+		print(" /grito threshold [num] - (default 12; current "..threshold..") wait a minimum of [num] seconds before allowing broadcasts to retrigger the event. note: your own level ups are not blocked but do restart this timer")
 		print(" /grito default - revert changes to the default settings referenced above")
 	end
 end
@@ -233,14 +241,14 @@ local function EventHandler( self, event, ... )
 	if event == "PLAYER_LEVEL_UP" then
 		last_triggered=t
 		start_time=t
-		frame:Show()
-		playSound()
-		display_GIF()
 		local t_to_level = secondsToDays(t_this_lvl+(t-t_onload))
 		t_this_lvl=0
 		t_onload=t
 		text1:SetText("¡You've just reached level "..arg1.."!")
 		text2:SetText("You were level ".. arg1-1 .." for "..t_to_level)
+		frame:Show()
+		playSound()
+		display_GIF()
 		SendChatMessage("¡I just reached level "..arg1..", amigos!", "GUILD")
 		C_ChatInfo.SendAddonMessage("GRITO_BROADCAST", "name="..UnitName("player")..", level="..arg1..", time="..t_to_level, "GUILD")
 	end
@@ -269,7 +277,6 @@ local function EventHandler( self, event, ... )
 			syncing=true
 			audio=true
 			threshold=12
-			last_triggered=0
 		end
 		updateFrame()
 		C_ChatInfo.RegisterAddonMessagePrefix("GRITO_BROADCAST")
