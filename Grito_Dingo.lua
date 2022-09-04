@@ -142,6 +142,17 @@ function onOrOff(b)
 	end
 end
 
+local function findClassColor ( name )
+	for i=1,GetNumGuildMembers() do
+		local ncheck,_,_,_,_,_,_,_,_,_,class = GetGuildRosterInfo(i)
+		if string.sub(ncheck, 1, string.len(name))==name then
+			local _,_,_,hex = GetClassColor(class)
+			return "|c"..hex
+		end
+	end
+	return "|cff6bb14d"
+end
+
 SLASH_GRITO1 = "/grito";	
 SlashCmdList["GRITO"] = function(msg)
 
@@ -264,7 +275,7 @@ local function EventHandler( self, event, ... )
 			frame:Show()
 			playSound()
 			display_GIF()
-			text1:SetText("¡"..broadcast.name.." just reached level "..broadcast.level.."!")
+			text1:SetText("¡"..findClassColor(broadcast.name)..broadcast.name.."|r just reached level "..broadcast.level.."!")
 			text2:SetText("They were level ".. tonumber(broadcast.level)-1 .." for "..broadcast.time)
 		end
 	end
