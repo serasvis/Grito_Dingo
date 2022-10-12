@@ -126,11 +126,11 @@ function secondsToDays(inputSeconds)
 	local fminutes = math.floor(bit.mod((bit.mod(inputSeconds,86400)),3600)/60)
 	local fseconds = math.floor(bit.mod(bit.mod((bit.mod(inputSeconds,86400)),3600),60))
  	if fdays > 0 then
-		return fdays.."d"..fhours.."h"..fminutes.."m"..fseconds.."s"
+		return fdays.."d "..fhours.."h "..fminutes.."m "..fseconds.."s"
 	elseif fhours > 0 then
-		return fhours.."h"..fminutes.."m"..fseconds.."s"
+		return fhours.."h "..fminutes.."m "..fseconds.."s"
 	else
- 		return fminutes.."m"..fseconds.."s"
+ 		return fminutes.."m "..fseconds.."s"
 	end
 end
 
@@ -260,7 +260,7 @@ local function EventHandler( self, event, ... )
 		frame:Show()
 		playSound()
 		display_GIF()
-		SendChatMessage("¡I just reached level "..arg1..", amigos!", "GUILD")
+		SendChatMessage("¡I just reached level "..arg1..", amigos! Tiempo necesario: "..t_to_level, "GUILD")
 		C_ChatInfo.SendAddonMessage("GRITO_BROADCAST", "name="..UnitName("player")..", level="..arg1..", time="..t_to_level, "GUILD")
 	end
 
