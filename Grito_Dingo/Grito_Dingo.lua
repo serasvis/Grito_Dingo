@@ -163,6 +163,8 @@ SlashCmdList["GRITO"] = function(msg)
 		display_GIF()
 		text1:SetText("¡This is a test!")
 		text2:SetText("You've been level "..UnitLevel("player").." for "..secondsToDays(t_this_lvl+(GetTime()-t_onload)) )
+		text1:SetWidth(text1:GetStringWidth())
+		text2:SetWidth(text2:GetStringWidth())
 		
 	elseif string.sub(msg,1,6)=="scale " then
 		local num = tonumber(string.sub(msg,7,-1))
@@ -257,6 +259,8 @@ local function EventHandler( self, event, ... )
 		t_onload=t
 		text1:SetText("¡You've just reached level "..arg1.."!")
 		text2:SetText("You were level ".. arg1-1 .." for "..t_to_level)
+		text1:SetWidth(text1:GetStringWidth())
+		text2:SetWidth(text2:GetStringWidth())
 		frame:Show()
 		playSound()
 		display_GIF()
@@ -272,11 +276,13 @@ local function EventHandler( self, event, ... )
 		if broadcast.name~=UnitName("player") then
 			last_triggered=t
 			start_time=t
+			text1:SetText("¡"..findClassColor(broadcast.name)..broadcast.name.."|r just reached level "..broadcast.level.."!")
+			text2:SetText("They were level ".. tonumber(broadcast.level)-1 .." for "..broadcast.time)
+			text1:SetWidth(text1:GetStringWidth())
+			text2:SetWidth(text2:GetStringWidth())
 			frame:Show()
 			playSound()
 			display_GIF()
-			text1:SetText("¡"..findClassColor(broadcast.name)..broadcast.name.."|r just reached level "..broadcast.level.."!")
-			text2:SetText("They were level ".. tonumber(broadcast.level)-1 .." for "..broadcast.time)
 		end
 	end
 
